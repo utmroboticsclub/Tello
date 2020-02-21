@@ -46,7 +46,7 @@ class Tello:
                 # TODO: is timeout considered failure or next command still get executed
                 # now, next one got executed
                 return
-        print('Done!!! sent command: %s to %s' % (command, self.tello_ip))
+        print('Sent command: %s to %s' % (command, self.tello_ip))
 
     def _receive_thread(self):
         """Listen to responses from the Tello.
@@ -64,10 +64,9 @@ class Tello:
                 print("Caught exception socket.error : %s" % exc)
 
     def on_close(self):
-        pass
-        # for ip in self.tello_ip_list:
-        #     self.socket.sendto('land'.encode('utf-8'), (ip, 8889))
-        # self.socket.close()
+        for ip in self.tello_ip_list:
+            self.socket.sendto('land'.encode('utf-8'), (ip, 8889))
+        self.socket.close()
 
     def get_log(self):
         return self.log

@@ -1,11 +1,5 @@
-import Tello
+import tello
 import time
-
-class TelloController:
-    def __init__(self):
-        self.tello = Tello()
-    def run(self):
-        # Tello program logic here
 
 
 class TelloPID:
