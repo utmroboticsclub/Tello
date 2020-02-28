@@ -7,7 +7,7 @@ import libh264decoder
 class Tello:
     """Wrapper class to interact with the Tello drone."""
 
-    def __init__(self, local_ip, local_port, imperial=False, command_timeout=.3, tello_ip='192.168.10.1',
+    def __init__(self, local_ip='', local_port=63041, imperial=False, command_timeout=.3, tello_ip='192.168.10.1',
                  tello_port=8889):
         """
         Binds to the local IP/port and puts the Tello into command mode.
@@ -122,7 +122,7 @@ class Tello:
         for framedata in frames:
             (frame, w, h, ls) = framedata
             if frame is not None:
-                print('frame size %i bytes, w %i, h %i, linesize %i' % (len(frame), w, h, ls))
+                #('frame size %i bytes, w %i, h %i, linesize %i' % (len(frame), w, h, ls))
 
                 frame = np.fromstring(frame, dtype=np.ubyte, count=len(frame), sep='')
                 frame = (frame.reshape((h, ls / 3, 3)))
@@ -140,7 +140,7 @@ class Tello:
 
         """
 
-        print (">> send cmd: {}".format(command))
+        #print (">> send cmd: {}".format(command))
         self.abort_flag = False
         timer = threading.Timer(self.command_timeout, self.set_abort_flag)
 
@@ -389,7 +389,21 @@ class Tello:
 
         return self.move('back', distance)
 
-    def move_down(self, distance):
+    def rc_move(self, a, b, c, d):
+        """
+        Controls tello via controller Axis
+        rc a b c d 
+        Description:
+        Send RC control via four channels.
+        a: left/right (-100~100)
+        b: forward/backward (-100~100)
+        c: up/down (-100~100)
+        d: yaw (-100~100)
+        """
+        return self.send_command('rc ' + str(a) + ' ' + str(b) + ' ' +  str(c) + ' ' + str(d))
+
+
+    def move_down(self, distace):
         """Moves down for a distance.
 
         See comments for Tello.move().

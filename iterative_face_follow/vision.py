@@ -1,12 +1,15 @@
+
 import cv2
 import sys
 
 class TelloVision:
     """Wrapper class to enable the Tello Vision."""
 
-    def __init__(self,tello,outputpath):
-
-        cascPath = sys.argv[1]
+    def __init__(self,tello):
+        self.tello = tello
+        cascPath = "./facialRecognitionModel.xml"
+        if len(sys.argv) == 2:
+            cascPath = sys.argv[1]
         self.faceCascade = cv2.CascadeClassifier(cascPath)
 
     def getFaceQuadrant(self, x,y,w,h, left, right):
@@ -20,7 +23,7 @@ class TelloVision:
             return 0
         return 1
 
-    def render(self):
+    def draw(self):
         """
         Renders the camera footage of Tello along with video changes
         """
@@ -61,6 +64,5 @@ class TelloVision:
                 cv2.rectangle(self.frame, (right, 0), (right + 1, 700), (255, 0, 0), 2)
             # transfer the format from frame to image         
             # image = Image.fromarray(self.frame)
-            cv2.
         except RuntimeError, e:
             print("[INFO] caught a RuntimeError")
