@@ -28,15 +28,31 @@ sudo apt-get install libswscale-dev -y
 sudo apt-get install python-matplotlib -y
 sudo apt-get install python-imaging-tk
 ```
+
 For your python dependencies, it is recommended to use venv:
 Guide to using Venv on Linux: https://docs.python-guide.org/dev/virtualenvs/
-Once in your Venv for this project name your venv "telloEnv", this way it is not picked up via our .gitignore
+Please name your venv "telloEnv", this way it is not picked up via our .gitignore
 ```
 pip install cmake
 pip install -r ./iterative_face_follow/requirements.txt
 ```
+
+Set up lib264decoder (Probably not required, but if libh264 gives issues, perform this step.)
+```
+
+cd h264decoder
+mkdir build
+cd build
+cmake ..
+make
+
+cp libh264decoder.so ../../
+
+````
 ## Running
 - Ensure A G710 Joystick is plugged into your motor.
 - Connect to Tello WiFi Network
+```
 cd iterative_face_follow
 python main.py
+```
