@@ -17,9 +17,9 @@ sudo apt-get install python2.7 python-pip -y
 sudo pip install --upgrade pip
 ```
 
-The following are required to compile the h264decoder python package
+The following are required to compile the h264decoder python package and run
+imaging.
 ``` bash
-sudo pip install cmake
 
 # install dependencies
 sudo apt-get install libboost-all-dev -y
@@ -28,6 +28,15 @@ sudo apt-get install libswscale-dev -y
 sudo apt-get install python-matplotlib -y
 sudo apt-get install python-imaging-tk
 ```
-The following are re
+For your python dependencies, it is recommended to use venv:
+Guide to using Venv on Linux: https://docs.python-guide.org/dev/virtualenvs/
+Once in your Venv for this project name your venv "telloEnv", this way it is not picked up via our .gitignore
+```
+pip install cmake
+pip install -r ./iterative_face_follow/requirements.txt
+```
 ## Running
 - Ensure A G710 Joystick is plugged into your motor.
+- Connect to Tello WiFi Network
+cd iterative_face_follow
+python main.py

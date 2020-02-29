@@ -19,10 +19,12 @@ def mainLoop():
         oi.update()
         if enabled:
             if mode == MANUAL:
+                #print(tello.get_speed())
+                time.sleep(100)
                 manualControl()
+                pass
             elif mode == TRACK_FACES:
                 pass
-
 def manualControl():
     '''
         Maps controller Axis to Tello Flight:

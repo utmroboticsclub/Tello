@@ -26,10 +26,12 @@ class OI:
         print("OI: Complete initialization")
 
     def update(self):
-        for event in pygame.event.get():
+        pygame.event.get()
+        '''for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 # Close the program any way you want, or troll users who want to close your program.
                 raise SystemExit
+            '''
     def getLeftX(self):
         return self.controller.get_axis(LEFT_X)
 

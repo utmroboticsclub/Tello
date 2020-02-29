@@ -44,6 +44,7 @@ class Tello:
 
         # to receive video -- send cmd: command, streamon
         self.socket.sendto(b'command', self.tello_address)
+        print(self.response)
         print('sent: command')
         self.socket.sendto(b'streamon', self.tello_address)
         print('sent: streamon')
@@ -403,7 +404,7 @@ class Tello:
         return self.send_command('rc ' + str(a) + ' ' + str(b) + ' ' +  str(c) + ' ' + str(d))
 
 
-    def move_down(self, distace):
+    def move_down(self, distance):
         """Moves down for a distance.
 
         See comments for Tello.move().
